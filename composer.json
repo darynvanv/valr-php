@@ -18,7 +18,7 @@
     },
     "autoload": {
         "psr-4": {
-            "darynvanv\\valr-php\\": "src/"
+            "DarynvanV\\VALR_PHP\\": "src/"
         }
     }
 }
