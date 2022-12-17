@@ -9,12 +9,18 @@ class VALR
     private $key;
     private $secret;
     
-    function __construct($key, $secret)
+    /**
+     * Supply a Key and Secret to access [AUTHENTICATED] routes.
+     */
+    function __construct($key = "", $secret = "")
     {
         $this->key = $key;
         $this->secret = $secret;
     }
 
+    /**
+     * [AUTHENTICATED] This will return all balances of the authenticated token
+     */
     function get_balances()
     {
         $balances = $this->call_api('/v1/account/balances');
@@ -22,6 +28,13 @@ class VALR
         return $balances;
     }
 
+
+    /**
+     * [PUBLIC] Return the price of a currency ($of) in another currency ($to) (See VALR for list of valid pairs.)
+     * @param string $of The symbol of the currency as 1
+     * @param string $to The symbol of the currency of the price to get
+     * @example get_price('btc', 'zar') will return the cost of 1 BTC in ZAR
+     */
     function get_price($of, $to)
     {
         $price = $this->call_api('/v1/public/' . $of . $to . '/marketsummary');
@@ -42,12 +55,12 @@ class VALR
 
     function get_currencies()
     {
-        $currencies = $this->call_api('v1/public/currencies');
+        $currencies = $this->call_api('/v1/public/currencies');
         return $currencies;
     }
     function get_pairs()
     {
-        $pairs = $this->call_api('v1/public/pairs');
+        $pairs = $this->call_api('/v1/public/pairs');
         return $pairs;
     }
 
